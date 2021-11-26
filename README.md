@@ -14,7 +14,7 @@ model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased', 
 
 max_seq_length = k
 classification_processor = ClassificationProcessor(tokenizer, k)
-tokenized_datasets = dataset.map(classing.process, batched=True)
+tokenized_datasets = dataset.map(classification_processor.process, batched=True)
 
 batch_size = 32
 args = TrainingArguments(
