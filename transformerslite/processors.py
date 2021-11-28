@@ -1,6 +1,5 @@
 from transformers import AutoTokenizer
 
-
 class ClassificationProcessor:
   """
   Processor for Text Classification
@@ -9,19 +8,14 @@ class ClassificationProcessor:
   def __init__(self, max_input_length):
     
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased", use_fast=True)
-    
-    return tokenizer
   
-  
-  def process(self, examples, tokenizer):
+  def process(self, examples):
 
     self.examples = examples
-    self.tokenizer = tokenizer
-
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased", use_fast=True)
     model_inputs = self.tokenizer(examples['sentence'], max_length=self.max_input_length, truncation=True, padding=True)
 
-    return model_inputs
+    return tokenizer, model_inputs
 
 
 class T5Seq2SeqProcessor:
@@ -31,18 +25,15 @@ class T5Seq2SeqProcessor:
   
   def __init__(self, max_input_length, max_target_length, prefix):
     
-    tokenizer = AutoTokenizer.from_pretrained("t5-small", use_fast=True)
     self.max_input_length = max_input_length
     self.max_target_length = max_target_length
     self.prefix = prefix
     
-    return tokenizer
-
-  def process(self, examples, tokenizer):
+  def process(self, examples):
 
     self.examples = examples
-    self.tokenizer = tokenizer
-    
+
+    tokenizer = AutoTokenizer.from_pretrained("t5-small", use_fast=True)
     inputs = [self.prefix + doc for doc in self.examples["source"]]
     model_inputs = self.tokenizer(inputs, max_length=self.max_input_length, truncation=True, padding=True)
 
@@ -52,7 +43,7 @@ class T5Seq2SeqProcessor:
 
     model_inputs["labels"] = labels["input_ids"]
     
-    return model_inputs 
+    return tokenizer, model_inputs 
   
   
 class LanguageModelProcessor:
@@ -63,15 +54,11 @@ class LanguageModelProcessor:
   def __init__(self, max_input_length):
     
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained("gpt-2", use_fast=True)
-    
-    return tokenizer
   
-  def process(self, examples, tokenizer):
+  def process(self, examples):
 
     self.examples = examples
-    self.tokenizer = tokenizer
-    
+    tokenizer = AutoTokenizer.from_pretrained("gpt-2", use_fast=True)
     model_inputs = self.tokenizer(examples['sentence'], max_length=self.max_input_length, truncation=True, padding=True)
 
-    return model_inputs
+    return tokenizer, model_inputs
