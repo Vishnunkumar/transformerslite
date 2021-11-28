@@ -6,11 +6,10 @@ class ClassificationProcessor:
   Processor for Text Classification
   """
   
-  def __init__(self, model_name, max_input_length):
+  def __init__(self, max_input_length):
     
-    self.model_name = model_name
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     
     return tokenizer
   
@@ -61,11 +60,10 @@ class LanguageModelProcessor:
   Processor for T5 models
   """
 
-  def __init__(self, model_name, max_input_length):
+  def __init__(self, max_input_length):
     
-    self.model_name = model_name
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+    tokenizer = AutoTokenizer.from_pretrained("gpt-2")
     
     return tokenizer
   
