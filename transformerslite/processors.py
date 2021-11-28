@@ -9,7 +9,7 @@ class ClassificationProcessor:
   def __init__(self, max_input_length):
     
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased", use_fast=True)
     
     return tokenizer
   
@@ -31,7 +31,7 @@ class T5Seq2SeqProcessor:
   
   def __init__(self, max_input_length, max_target_length, prefix):
     
-    tokenizer = AutoTokenizer.from_pretrained("t5-small")
+    tokenizer = AutoTokenizer.from_pretrained("t5-small", use_fast=True)
     self.max_input_length = max_input_length
     self.max_target_length = max_target_length
     self.prefix = prefix
@@ -63,7 +63,7 @@ class LanguageModelProcessor:
   def __init__(self, max_input_length):
     
     self.max_input_length = max_input_length
-    tokenizer = AutoTokenizer.from_pretrained("gpt-2")
+    tokenizer = AutoTokenizer.from_pretrained("gpt-2", use_fast=True)
     
     return tokenizer
   
