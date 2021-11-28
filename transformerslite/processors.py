@@ -1,5 +1,6 @@
 from transformers import AutoTokenizer
 
+
 class ClassificationProcessor:
   """
   Processor for Text Classification
@@ -14,14 +15,16 @@ class ClassificationProcessor:
     return tokenizer
   
   
-  def process(self, examples, self.tokenizer):
+  def process(self, examples, tokenizer):
 
     self.examples = examples
+    self.tokenizer = tokenizer
+
     model_inputs = self.tokenizer(examples['sentence'], max_length=self.max_input_length, truncation=True, padding=True)
 
     return model_inputs
 
-  
+
 class T5Seq2SeqProcessor:
   """
   Processor for T5 models
@@ -66,9 +69,11 @@ class LanguageModelProcessor:
     
     return tokenizer
   
-  def process(self, examples, self.tokenizer):
+  def process(self, examples, tokenizer):
 
     self.examples = examples
+    self.tokenizer = tokenizer
+    
     model_inputs = self.tokenizer(examples['sentence'], max_length=self.max_input_length, truncation=True, padding=True)
 
     return model_inputs
