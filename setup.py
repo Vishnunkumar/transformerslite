@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'transformerslite',         
   packages = ['transformerslite'],   
-  version = '0.6',      
+  version = '0.7',      
   license='MIT',        
   description = 'Process, Train and Deploy small transfomer models with less code',   
   author = 'Vishnu N',                  
   author_email = 'vishnunkumar25@gmail.com',      
   url = 'https://github.com/Vishnunkumar/transformerslite',   
-  download_url ='https://github.com/Vishnunkumar/transformerslite/archive/refs/tags/v-0.6.tar.gz',    
+  download_url ='https://github.com/Vishnunkumar/transformerslite/archive/refs/tags/v-0.7.tar.gz',    
   keywords = ['NLP', 'Deep learning', 'Transformers'],   
   install_requires = [            
           'transformers'
