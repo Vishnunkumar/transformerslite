@@ -3,7 +3,7 @@ Train simple lite transformer models in few lines of code
 
 ## Implementation
 
-- Sequence Classification 
+- **Sequence Classification** [bert-base-uncased](https://huggingface.co/transformers/pretrained_models.html)
 
 ```python
 from transformerslite import pipeline
@@ -26,7 +26,7 @@ training_pipeline.fit()
 
 ```
 
-- Sequence to Sequence modelling
+- **Sequence to Sequence Modeling** [t5-small](https://huggingface.co/transformers/pretrained_models.html)
 
 ```python
 from transformerslite import pipeline
