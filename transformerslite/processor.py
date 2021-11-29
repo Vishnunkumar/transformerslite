@@ -1,6 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSequenceClassification, AutoModelForCausalLM, AutoModelForMaskedLM, TrainingArguments, Trainer, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
 
-
 class ClassificationProcessor:
   """
   Processor for Text Classification
@@ -79,17 +78,16 @@ class LanguageModelProcessor:
 
 class SeqClassifier:
 
-    def __init__(self, dataset, epochs, batch_size, learning_rate, num_class):
+    def __init__(self, dataset, epochs, max_input_length, batch_size, learning_rate, num_class):
 
         self.dataset = dataset
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
         self.num_class = num_class
-        
-    def fit(self, max_input_length):
-        
         self.max_input_length = max_input_length
+        
+    def fit(self):
 
         preprocessor = ClassificationProcessor(max_input_length = self.max_input_length)
         encoded_datasets = self.dataset.map(preprocessor.process, batched=True)
@@ -126,18 +124,18 @@ class SeqClassifier:
 
 class T5Seq2Seq:
 
-    def __init__(self, dataset, epochs, batch_size, learning_rate):
+    def __init__(self, dataset, max_input_length, max_target_length, prefix,
+    epochs, batch_size, learning_rate):
 
         self.dataset = dataset
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
-
-    def fit(self, max_input_length, max_target_length, prefix):
-        
         self.max_input_length = max_input_length
-        self.max_target_length = max_target_length
+        self.max_target_length = max_target_length 
         self.prefix = prefix
+
+    def fit(self):
 
         preprocessor = T5Seq2SeqProcessor(max_input_length = self.max_input_length, 
         max_target_length=self.max_target_length, prefix=self.prefix)
