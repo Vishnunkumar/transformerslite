@@ -1,5 +1,5 @@
 from transformers import AutoModelForSeq2SeqLM, AutoModelForSequenceClassification, AutoModelForCausalLM, AutoModelForMaskedLM, TrainingArguments, Trainer, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
-from processor import *
+from transformerslite.processor import *
 
 class SeqClassifier:
 
