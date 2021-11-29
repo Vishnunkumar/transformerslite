@@ -18,7 +18,7 @@ class ClassificationProcessor:
 
     return model_inputs
   
-  def tokenizerfunction(self):
+  def tokenizer_function(self):
 
     return AutoTokenizer.from_pretrained("bert-base-uncased", use_fast=True)
 
@@ -94,7 +94,7 @@ class SeqClassifier:
         columns_to_return = ['input_ids', 'labels', 'attention_mask']
         encoded_datasets.set_format(type='torch', columns=columns_to_return)
 
-        tokenizer = preprocessor.tokenized_function()
+        tokenizer = preprocessor.tokenizer_function()
         model = AutoModelForSequenceClassification.from_pretrained("bert-base-uncased", 
         num_labels=self.num_class)
 
@@ -144,7 +144,7 @@ class T5Seq2Seq:
         columns_to_return = ['input_ids', 'labels', 'attention_mask']
         encoded_datasets.set_format(type='torch', columns=columns_to_return)
         
-        tokenizer = preprocessor.tokenized_function()
+        tokenizer = preprocessor.tokenizer_function()
         model = AutoModelForSeq2SeqLM.from_pretrained("t5-small")
 
         args = Seq2SeqTrainingArguments(
