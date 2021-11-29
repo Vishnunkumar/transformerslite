@@ -1,39 +1,53 @@
-# TransformersProcessors
-Data pre-processing for transformer models using simple python wrapper
+# transformerslite
+Train simple lite transformer models in few lines of code
 
 ## Implementation
 
+- Sequence Classification 
+
 ```python
-
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, TrainingArguments, Trainer
+from transformerslite import pipeline
 from datasets import load_dataset
-from TransformersProcessors.processor import ClassificationProcessor
 
-tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased', use_fast=True)
-model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=m)
+# mandatory to provide valid and train files for now
+data = load_dataset('csv', data_files={
+    "train": "hg.csv",
+    "valid": "hg2.csv"
+})
 
-max_seq_length = k
-classification_processor = ClassificationProcessor(tokenizer, k)
-tokenized_datasets = dataset.map(classification_processor.process, batched=True)
 
-batch_size = 32
-args = TrainingArguments(
-    "sample",
-    learning_rate=2e-5,
-    per_device_train_batch_size=batch_size,
-    weight_decay=0.01,
-    save_total_limit=3,
-    num_train_epochs=5,
-    fp16=True,
-    push_to_hub=False,
-)
+training_pipeline = pipeline.SeqClassifier(data, 
+                                           epochs=4, 
+                                           max_input_length=32, 
+                                           batch_size=1,
+                                           learning_rate=0.0001, 
+                                           num_class=2)
+training_pipeline.fit()
 
-trainer = Trainer(
-    cmodel,
-    args,
-    train_dataset=encoded_datasets,
-    tokenizer=tokenizer
-)
-
-trainer.train()
 ```
+
+- Sequence to Sequence modelling
+
+```python
+from transformerslite import pipeline
+from datasets import load_dataset
+
+# mandatory to provide valid and train files for now
+data = load_dataset('csv', data_files={
+    "train": "hg.csv",
+    "valid": "hg2.csv"
+})
+
+
+training_pipeline = pipeline.T5Seq2Seq(data,
+                                       max_input_length=32,
+                                       max_target_length=32, 
+                                       prefix='seq: ',
+                                       epochs=4, 
+                                       batch_size=1,
+                                       learning_rate=0.0001)
+training_pipeline.fit()
+
+```
+
+
