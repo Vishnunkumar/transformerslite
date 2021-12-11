@@ -87,7 +87,7 @@ class SeqClassifier:
         self.num_class = num_class
         self.max_input_length = max_input_length
         
-    def train(self):
+    def model(self):
 
         preprocessor = ClassificationProcessor(max_input_length = self.max_input_length)
         encoded_datasets = self.dataset.map(preprocessor.process, batched=True)
@@ -119,7 +119,13 @@ class SeqClassifier:
                 tokenizer=tokenizer
         )
         
-        return trainer
+        return trainer, tokenizer
+
+      def fit(self, trainer):
+        
+        self.trainer = trainer
+        
+        return trainer.train()
 
 
 class T5Seq2Seq:
@@ -135,7 +141,7 @@ class T5Seq2Seq:
         self.max_target_length = max_target_length 
         self.prefix = prefix
 
-    def train(self):
+    def model(self):
 
         preprocessor = T5Seq2SeqProcessor(max_input_length = self.max_input_length, 
         max_target_length=self.max_target_length, prefix=self.prefix)
@@ -172,4 +178,10 @@ class T5Seq2Seq:
                 tokenizer=tokenizer
         )
         
-        return trainer
+        return trainer, tokenizer
+      
+      def fit(self, trainer):
+        
+        self.trainer = trainer
+        
+        return trainer.train()
