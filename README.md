@@ -22,8 +22,8 @@ training_pipeline = pipeline.SeqClassifier(data,
                                            batch_size=1,
                                            learning_rate=0.0001, 
                                            num_class=2)
-training_pipeline.fit()
-
+trainer, tokenizer = training_pipeline.model()
+trainer.train()
 ```
 
 - **Sequence to Sequence Modeling** [t5-small](https://huggingface.co/transformers/pretrained_models.html)
@@ -46,8 +46,9 @@ training_pipeline = pipeline.T5Seq2Seq(data,
                                        epochs=4, 
                                        batch_size=1,
                                        learning_rate=0.0001)
-training_pipeline.fit()
 
+trainer, tokenizer = training_pipeline.model()
+trainer.train()
 ```
 
 
