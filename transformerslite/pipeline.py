@@ -121,7 +121,7 @@ class SeqClassifier:
         
         return trainer, tokenizer
 
-      def fit(self, trainer):
+    def fit(self, trainer):
         
         self.trainer = trainer
         
@@ -180,7 +180,7 @@ class T5Seq2Seq:
         
         return trainer, tokenizer
       
-      def fit(self, trainer):
+    def fit(self, trainer):
         
         self.trainer = trainer
         
