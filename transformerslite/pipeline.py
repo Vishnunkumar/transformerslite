@@ -119,7 +119,7 @@ class SeqClassifier:
                 tokenizer=tokenizer
         )
         
-        return trainer.train()
+        return trainer, trainer.train()
 
 
 class T5Seq2Seq:
@@ -172,4 +172,4 @@ class T5Seq2Seq:
                 tokenizer=tokenizer
         )
         
-        return trainer.train()
+        return trainer, trainer.train()
