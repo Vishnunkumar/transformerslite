@@ -125,7 +125,7 @@ class SeqClassifier:
         
         self.trainer = trainer
         
-        return trainer.train()
+        return self.trainer.train()
 
 
 class T5Seq2Seq:
@@ -184,4 +184,4 @@ class T5Seq2Seq:
         
         self.trainer = trainer
         
-        return trainer.train()
+        return self.trainer.train()
