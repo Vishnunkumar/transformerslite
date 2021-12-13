@@ -51,4 +51,5 @@ trainer, tokenizer = training_pipeline.model()
 trainer.train()
 ```
 
-
+A spellchecker application is hosted on huggingface spaces which is finetuned on randomly modified 50000 sentences with errors imputed. 
+Do try it out [here](https://huggingface.co/spaces/vishnun/SpellCorrectorT5)
